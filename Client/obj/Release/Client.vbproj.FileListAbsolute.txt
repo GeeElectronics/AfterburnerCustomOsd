@@ -1,0 +1,14 @@
+C:\Users\Dennis\source\repos\Client\Client\bin\Release\Client.exe.config
+C:\Users\Dennis\source\repos\Client\Client\bin\Release\Client.exe
+C:\Users\Dennis\source\repos\Client\Client\bin\Release\Client.pdb
+C:\Users\Dennis\source\repos\Client\Client\bin\Release\Client.xml
+C:\Users\Dennis\source\repos\Client\Client\bin\Release\MSIAfterburner.NET.dll
+C:\Users\Dennis\source\repos\Client\Client\obj\Release\Client.Form1.resources
+C:\Users\Dennis\source\repos\Client\Client\obj\Release\Client.Resources.resources
+C:\Users\Dennis\source\repos\Client\Client\obj\Release\Client.vbproj.GenerateResource.cache
+C:\Users\Dennis\source\repos\Client\Client\obj\Release\Client.vbproj.CoreCompileInputs.cache
+C:\Users\Dennis\source\repos\Client\Client\obj\Release\Client.vbproj.CopyComplete
+C:\Users\Dennis\source\repos\Client\Client\obj\Release\Client.exe
+C:\Users\Dennis\source\repos\Client\Client\obj\Release\Client.xml
+C:\Users\Dennis\source\repos\Client\Client\obj\Release\Client.pdb
+C:\Users\Dennis\source\repos\Client\Client\obj\Release\Client.vbproj.AssemblyReference.cache

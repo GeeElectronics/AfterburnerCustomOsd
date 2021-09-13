@@ -1,0 +1,7 @@
+﻿################################################################################
+# Diese .gitignore-Datei wurde von Microsoft(R) Visual Studio automatisch erstellt.
+################################################################################
+
+/.vs/Client/v16/.suo
+/packages/MSIAfterburnerNET.Common.1.0.2
+/Client/bin/Debug
