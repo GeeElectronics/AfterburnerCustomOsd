@@ -65,7 +65,6 @@ Partial Class Form1
         Me.TransparencyKey = System.Drawing.Color.DimGray
         Me.ResumeLayout(False)
         Me.PerformLayout()
-        Me.SetTopLevel(True)
 
     End Sub
     Friend WithEvents Timer1 As Timer

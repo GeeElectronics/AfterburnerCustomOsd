@@ -5,8 +5,9 @@ Imports System.Drawing
 
 
 Public Class Form1
-    Dim active As Boolean = True
+
     Dim hwi As New HardwareMonitor
+    Dim averagecolortimer As Integer = 5
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If (My.Settings.X = 0) Then
         Else
@@ -37,10 +38,33 @@ Public Class Form1
     End Sub
 
 
+    Private Function getAverageColor(ByVal bmp As Bitmap) As Color
+        Dim totalR As Integer = 0
+        Dim totalG As Integer = 0
+        Dim totalB As Integer = 0
+        For x As Integer = 0 To bmp.Width - 1
+            For y As Integer = 0 To bmp.Height - 1
+                Dim pixel As Color = bmp.GetPixel(x, y)
+                totalR += pixel.R
+                totalG += pixel.G
+                totalB += pixel.B
+            Next
+        Next
+        Dim totalPixels As Integer = bmp.Height * bmp.Width
+        Dim averageR As Integer = totalR \ totalPixels
+        Dim averageg As Integer = totalG \ totalPixels
+        Dim averageb As Integer = totalB \ totalPixels
+        Return Color.FromArgb(averageR, averageg, averageb)
+    End Function
+
+
     Private Function SetComplementary() As Bitmap
         Dim bmp As New Bitmap(Me.Size.Width, Me.Size.Height)
+
         Graphics.FromImage(bmp).CopyFromScreen(Me.DesktopLocation, New Point(0, 0), Me.Size)
-        TextBox2.ForeColor = Color.FromArgb(bmp.GetPixel(Size.Width / 2, Size.Height / 2).ToArgb() Xor &HFFFFFF)
+
+        Dim averagecolor As Color = getAverageColor(bmp)
+        TextBox2.ForeColor = Color.FromArgb(averagecolor.ToArgb() Xor &HFFFFFF)
 
         Return bmp
     End Function
@@ -49,8 +73,15 @@ Public Class Form1
     Private Sub Aktualisieren()
         Try
 
+            If (averagecolortimer > 5) Then
+                SetComplementary()
+                averagecolortimer = 0
+            Else
+                averagecolortimer += 1
+            End If
 
-            SetComplementary()
+
+
             hwi.ReloadAll()
             Dim Result As String = ""
             Dim Elements As Integer = 0
@@ -76,28 +107,8 @@ Public Class Form1
         End Try
     End Sub
 
-    Private Sub TabPage1_Click(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub TabControl1_SelectedIndexChanged(sender As Object, e As EventArgs)
-
-    End Sub
-
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         Aktualisieren()
-    End Sub
-
-    Private Sub Form1_MouseHover(sender As Object, e As EventArgs) Handles MyBase.MouseHover
-
-    End Sub
-
-    Private Sub Form1_MouseLeave(sender As Object, e As EventArgs) Handles MyBase.MouseLeave
-
-    End Sub
-
-    Private Sub TextBox2_TextChanged(sender As Object, e As EventArgs) Handles TextBox2.TextChanged
-
     End Sub
 
     Private Sub Form1_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
@@ -105,28 +116,17 @@ Public Class Form1
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable
         If (DesktopLocation.X > -32000) Then
             Me.SetDesktopLocation(DesktopLocation.X - 7, DesktopLocation.Y - 30)
-            Me.ControlBox = True
-            active = True
+
         End If
     End Sub
 
     Private Sub Form1_Deactivate(sender As Object, e As EventArgs) Handles MyBase.Deactivate
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
-        'Me.ControlBox = False
+
 
         If (DesktopLocation.X > -32000) Then
             Me.SetDesktopLocation(DesktopLocation.X + 7, DesktopLocation.Y + 30)
         End If
-        active = False
-
-    End Sub
-
-    Private Sub Form1_Leave(sender As Object, e As EventArgs) Handles MyBase.Leave
-        'Me.ControlBox = False
-        'active = False
-    End Sub
-
-    Private Sub TextBox2_Click(sender As Object, e As EventArgs) Handles TextBox2.Click
 
 
     End Sub
